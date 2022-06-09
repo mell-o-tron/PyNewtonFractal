@@ -10,8 +10,8 @@ import PyNewtFrac
 f = lambda x : x**4 + 5
 f1 = lambda x : 4 * x  **3
 
-x0 = -3
+x0 = - 3 + 2j
 
-winsize = 400
+resolution = 600
 
-PyNewtFrac.newton_roots_coloring(f, f1, x0, winsize)
+PyNewtFrac.newton_roots_coloring(f, f1, x0, resolution)

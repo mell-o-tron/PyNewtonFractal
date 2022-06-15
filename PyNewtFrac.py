@@ -1,5 +1,6 @@
 import pygame
 from time import sleep
+from time import time
 import numpy as np
 import math
 from pygame.locals import *
@@ -45,6 +46,10 @@ def runPG(A, roots, root_colors):
     scale = 1
     while True:
         print("rendering...")
+
+        A_remapped = pygame.surfarray.pixels2d(screen)
+        print(A_remapped[0][0])
+        t = time()
         for i in range(-w1, w1):
             for j in range(-w1, w1):
                 (x, y) = (math.floor((i + w1) * side / winsize), math.floor((j + w1) * side / winsize))
@@ -53,10 +58,13 @@ def runPG(A, roots, root_colors):
                 (x, y) = (math.floor(x/scale) + corr_value, math.floor(y/scale) + corr_value)
 
                 index = x + side * y
+                c = root_colors[A[index]]
+                A_remapped[i + w1][j + w1] = pygame.Color(c[0], c[1], c[2])
 
-                pixels(screen, root_colors[A[index]], (i+w1,j+w1), 1)
 
-        sleep(.2)
+
+        t1 = time()
+        print("Rendered in: " + str(t1 - t) + " seconds")
         # Flip the display
         print("waiting for input...")
         while True:
